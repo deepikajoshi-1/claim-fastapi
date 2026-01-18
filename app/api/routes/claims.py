@@ -4,7 +4,6 @@ from app.db.session import SessionLocal
 from app.schema.claim import ClaimCreate
 from app.services.claim_service import create_claim, update_claim_status
 from app.api.dependencies import require_role
-from app.db.models import Claim
 
 router = APIRouter(prefix="/claims", tags=["Claims"])
 
@@ -43,7 +42,7 @@ def list_claims(
     db: Session = Depends(get_db)
 ):
     claims = (
-        db.query(Claim)
+        db.query(claims.Claim)
         .offset(skip)
         .limit(limit)
         .all()
